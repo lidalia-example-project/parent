@@ -1,0 +1,9 @@
+[submodule "app2"]
+	path = app2
+	url = git@github.com:lidalia-example-project/app2.git
+[submodule "app1"]
+	path = app1
+	url = git@github.com:lidalia-example-project/app1.git
+[submodule "lib"]
+	path = lib
+	url = git@github.com:lidalia-example-project/lib.git

@@ -1,0 +1,16 @@
+subprojects.each { it.evaluate() }
+
+def allDependencies = subprojects.collect { it.configurations.collect { it.dependencies }.flatten() }.flatten()
+def localDependencies = allDependencies.findAll { dependency ->
+    subprojects.any { it.name == dependency.name && it.version == dependency.version && it.group == dependency.group }
+}
+
+subprojects {
+    configurations.all {
+        resolutionStrategy.dependencySubstitution {
+            localDependencies.each {
+                substitute module("${it.group}:${it.name}:${it.version}") with project(":${it.name}")
+            }
+        }
+    }
+}
